@@ -360,7 +360,9 @@ export function Stage({ ready, stack, onJump }) {
       S *= 1.02
       const q1 = pre(S)
       rigRef.current.style.transformOrigin = `${ox}px ${oy}px`
-      const D = Math.min(2, devicePixelRatio || 1), cv = canvasRef.current
+      // PERF: the canvas only shows while the dive is moving (motion hides detail), so touch devices
+      // draw it at 1x: a quarter of the pixels of a 2x phone, which is what made the dive stutter
+      const D = Math.min(matchMedia('(pointer: coarse)').matches ? 1 : 2, devicePixelRatio || 1), cv = canvasRef.current
       cv.width = Math.round(vw * D); cv.height = Math.round(vh * D)
       geo.current = {
         D, ctx: cv.getContext('2d'), skyImg: skyRef.current.children[1], deskImg: desk.querySelector('img'),

@@ -28,3 +28,5 @@ dist-ssr
 
 # confidential client report (kept local, bundled into the deployed site only)
 src/assets/seo-report.pdf
+
+.vercel

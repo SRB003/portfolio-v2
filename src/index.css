@@ -2006,3 +2006,20 @@ a.pji-row:hover .pji-y svg { transform: translate(3px, -3px); }
   #stage:not(.stack) .card-art { height: clamp(84px, calc(100svh - 470px), 150px); }
 }
 @media (max-width: 860px) { #stage:not(.stack) .prog-row { padding-left: 72px; } #stage:not(.stack) .prog-row > .prog-k:first-child { display: none; } }
+
+/* =================== phones (portrait): spacing that adapts to every screen height ===================
+   Hero: a slightly larger desk, and the intro copy sits in the middle of the sky between the nav and
+   the top of the desk scene (the top ~42% of the desk art is open sky), instead of hugging the top.
+   Work rail: the cards stretch to the space between the heading and the progress row, so no screen
+   ends up with a band of empty paper under them. */
+@media (max-width: 860px) and (max-aspect-ratio: 1/1) {
+  #stage:not(.stack) .hero-desk { --dw: min(215vw, 112svh); bottom: 2svh; }
+  #stage:not(.stack) .copy { top: max(84px, calc((100svh - 2svh - min(215vw, 112svh) * 0.5628 * 0.58 + 72px) / 2 - 150px)); }
+  /* fixed (not flex-filled) so scrolling the rail never triggers layout: the art takes the height
+     that is left once the heading, plane lane, card text and progress row are accounted for */
+  #stage:not(.stack) .card-art { height: clamp(96px, calc(100svh - 550px), 380px); }
+  #stage:not(.stack) .chips { display: none; }
+}
+@media (max-width: 860px) and (max-aspect-ratio: 1/1) and (max-height: 700px) {
+  #stage:not(.stack) .card-art { height: clamp(84px, calc(100svh - 470px), 200px); }
+}

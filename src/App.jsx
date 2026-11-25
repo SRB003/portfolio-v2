@@ -49,7 +49,8 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    // touch devices keep native scrolling: it is smoother there and Lenis only adds per-frame work
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(pointer: coarse)').matches) return
     const l = new Lenis({ lerp: 0.09, smoothWheel: true })
     lenis.current = l
     let raf
